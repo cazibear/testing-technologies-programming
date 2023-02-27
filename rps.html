@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Rock Paper Scissors</title>
+	</head>
+	<body>
+		<button id="rock">Rock</button>
+		<button id="paper">Paper</button>
+		<button id="scissors">Scissors</button>
+
+		<h2>Your option:</h2>
+		<span id="user-option"></span>
+
+		<h2>Computer option:</h2>
+		<span id="computer-option"></span>
+
+		<h2>Result:</h2>
+		<span id="result"></span>
+
+		<script>
+			// the buttons
+			const rockBtn = document.getElementById("rock");
+			const paperBtn = document.getElementById("paper");
+			const scissorsBtn = document.getElementById("scissors");
+
+			// the spans
+			const userOptionSpan = document.getElementById("user-option");
+			const computerOptionSpan =
+				document.getElementById("computer-option");
+			const resultSpan = document.getElementById("result");
+
+			// the options
+			const options = ["Rock", "Paper", "Scissors"];
+
+			// event listeners
+			rockBtn.addEventListener("click", function () {
+				playGame(options[0]);
+			});
+			paperBtn.addEventListener("click", function () {
+				playGame(options[1]);
+			});
+			scissorsBtn.addEventListener("click", function () {
+				playGame(options[2]);
+			});
+
+			// game function
+			function playGame(userOption) {
+				var computerOption =
+					options[Math.floor(Math.random() * options.length)];
+
+				userOptionSpan.innerHTML = userOption;
+				computerOptionSpan.innerHTML = computerOption;
+
+				// draw condition
+				if (userOption === computerOption) {
+					resultSpan.innerHTML = "Draw";
+				}
+				// win conditions
+				else if (
+					(userOption === "Rock" && computerOption === "Scissors") ||
+					(userOption === "Paper" && computerOption === "Rock") ||
+					(userOption === "Scissors" && computerOption === "Paper")
+				) {
+					resultSpan.innerHTML = "Win";
+				}
+				// lose otherwise
+				else {
+					resultSpan.innerHTML = "Lose";
+				}
+			}
+		</script>
+	</body>
+</html>
