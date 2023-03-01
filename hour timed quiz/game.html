@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Secret Number</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+			crossorigin="anonymous" />
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<h1>Secret Number</h1>
+					<p>
+						Guess the secret number between 1 and 10! To start a new
+						game press
+						<button class="btn btn-primary" id="startButton">
+							here!
+						</button>
+					</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<!-- user input col -->
+					<div class="input-group">
+						<input
+							class="form-control"
+							type="number"
+							min="1"
+							max="10"
+							id="guessInput"
+							placeholder="place your guess here"
+							disabled />
+						<button
+							class="btn btn-outline-secondary"
+							id="guessButton"
+							disabled>
+							Guess
+						</button>
+					</div>
+				</div>
+				<div class="col">
+					<!-- output col -->
+					<div id="outputs"></div>
+				</div>
+			</div>
+		</div>
+		<script src="main.js"></script>
+	</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Secret Number</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+			crossorigin="anonymous" />
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<h1>Secret Number</h1>
+					<p>
+						To start a new game press
+						<button class="btn btn-primary" id="startButton">
+							here!
+						</button>
+					</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<!-- user input col -->
+					<div class="input-group">
+						<input
+							class="form-control"
+							type="number"
+							name="guess"
+							id="guessInput"
+							aria-label="place your guess here"
+							placeholder="place your guess here"
+							disabled />
+						<button
+							class="btn btn-outline-secondary"
+							id="guessButton"
+							disabled>
+							Guess
+						</button>
+					</div>
+				</div>
+				<div class="col">
+					<!-- output col -->
+					<div id="outputs"></div>
+				</div>
+			</div>
+		</div>
+		<script>
+			let guesses = 0;
+			let secret = 0;
+			let guessInput = document.getElementById("guessInput");
+			let guessButton = document.getElementById("guessButton");
+			let outputDiv = document.getElementById("outputs");
+			let p = document.createElement("p");
+
+			document
+				.getElementById("startButton")
+				.addEventListener("click", () => {
+					secret = Math.floor(Math.random() * 10 + 1);
+					// make the secret between 1 and 10 to make it possible
+					guessInput.disabled = false;
+					guessButton.disabled = false;
+					// enable the guess feature
+					console.log(secret);
+
+					p.innerText =
+						"You have 3 tries to guess the secret number.";
+					outputDiv.appendChild(p);
+					// let the user know they have 3 guesses
+				});
+
+			document
+				.getElementById("guessButton")
+				.addEventListener("click", () => {
+					guesses += 1; // tracking how many guesses
+					console.log(">", parseInt(guessInput.value) > secret);
+					console.log("<", parseInt(guessInput.value) < secret);
+					console.log("=", parseInt(guessInput.value) === secret);
+
+					let message = document.createElement("p");
+					if (parseInt(guessInput.value) > secret) {
+						// user's guess is higher
+						message.innerText +=
+							"your guess is higher than the secret number...";
+					}
+					if (parseInt(guessInput.value) < secret) {
+						// user's guess is lower
+						message.innerText +=
+							"your guess is lower than the secret number...";
+					}
+					if (parseInt(guessInput.value) === secret) {
+						// the user guessed the secret
+						message.innerText += "you guessed correctly, you won!";
+						guessInput.disabled = true;
+						guessButton.disabled = true;
+						// game over :(
+					}
+					outputDiv.appendChild(message); // showing the message about user's guess
+
+					// show how many guesses left
+					p.innerText = `You have ${3 - guesses} guesses left.`;
+					outputDiv.appendChild(p);
+
+					// check if game over
+					if (guesses == 3) {
+						p.innerText =
+							"You didn't guess the secret number, game over.";
+						outputDiv.appendChild(p);
+
+						guessInput.disabled = true;
+						guessButton.disabled = true;
+						// game over :(
+					}
+				});
+		</script>
+	</body>
+</html>
